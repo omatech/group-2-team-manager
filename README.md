@@ -1,2 +1,4 @@
 # group-2-team-manager
-Team manager project of Group 2 
+Last Domain Model:
+
+![alt text](out/docs/domain_model/domain_model.png)
