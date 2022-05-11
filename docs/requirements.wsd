@@ -1,0 +1,42 @@
+@startuml
+  class Holding
+  class Worker
+  class Reviewer
+  class Client
+  class Company
+  class Notification
+  class Project{
+    + hourPrice
+    + vencimiento_pago
+    + fecha_entrega
+  }
+  class Department{
+    + type
+  }
+  class Entry{
+    + description
+    + timestamp
+  }
+  class WorkerEntry implements Entry
+  class BagEntry implements Entry
+  class AssumedEntry implements Entry
+  class Invoice{
+    + declared
+    + status [issued | paid | partial | created | pending]
+  }
+  class CorrectiveInvoice
+  
+  
+  Holding *-- Company
+  Company *-- Project
+  Company ..> Client
+  Company ..> Reviewer
+  Project ..> Department
+  Project ..> Worker
+  Project *-- Entry
+  Entry *-- Worker
+  Entry *-- Department
+  Project *-- Invoice
+  Worker --> Notification
+  Invoice ..> CorrectiveInvoice
+@enduml
