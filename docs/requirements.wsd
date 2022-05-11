@@ -5,24 +5,39 @@
   class Client
   class Company
   class Notification
-  class Project{
+  class Project {
     + hourPrice
-    + vencimiento_pago
-    + fecha_entrega
+    + deadLine
+    + paymentDeadLine
   }
-  class Department{
-    + type
+  class Department {
+    + type: DepartmentType
   }
-  class Entry{
+  class DepartmentType << enumeration >> {
+    design
+    markup
+    development
+  }
+
+  class Entry {
     + description
+    + concept
     + timestamp
   }
   class WorkerEntry implements Entry
   class BagEntry implements Entry
   class AssumedEntry implements Entry
-  class Invoice{
-    + declared
-    + status [issued | paid | partial | created | pending]
+  class HostingEntry implements Entry
+  class Invoice {
+    + isDeclared
+    + type: InvoiceType
+  }
+  class InvoiceType << enumeration >> {
+    issued
+    paid
+    partial
+    created
+    pending
   }
   class CorrectiveInvoice
   
@@ -39,4 +54,7 @@
   Project *-- Invoice
   Worker --> Notification
   Invoice ..> CorrectiveInvoice
+  Invoice +-- InvoiceType
+  Department +-- DepartmentType
+
 @enduml
