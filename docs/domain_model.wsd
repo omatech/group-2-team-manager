@@ -18,7 +18,6 @@
     markup
     development
   }
-
   class Entry {
     + description
     + concept
@@ -30,9 +29,9 @@
   class HostingEntry implements Entry
   class Invoice {
     + isDeclared
-    + type: InvoiceType
+    + status: InvoiceStatus
   }
-  class InvoiceType << enumeration >> {
+  class InvoiceStatus << enumeration >> {
     issued
     paid
     partial
@@ -40,7 +39,7 @@
     pending
   }
   class CorrectiveInvoice
-  
+  class SubProject
   
   Holding *-- Company
   Company *-- Project
@@ -54,7 +53,7 @@
   Project *-- Invoice
   Worker --> Notification
   Invoice ..> CorrectiveInvoice
-  Invoice +-- InvoiceType
+  Invoice +-- InvoiceStatus
   Department +-- DepartmentType
 
 @enduml
