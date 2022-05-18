@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+actor Employee as employee
+actor Time as time
+actor Reviewer as reviewer
+actor Client as client
+/' another actor with inheritance '/
+
+package EmployeeUseCases {
+    usecase createEmployee
+    usecase updateEmployee
+    usecase deleteEmployee
+    usecase listEmployees
+    usecase showEmployee
+    usecase sendNotificationToEmployee
+}
+/' time - syncEmployees (?) '/
+time --> createEmployee 
+time --> updateEmployee
+time --> deleteEmployee
+time --> sendNotificationToEmployee
+employee --> listEmployees
+employee --> showEmployee
+/' reviewer --> listEmployee
+reviewer --> showEmployee '/
+
+
+
+package ClientUseCases {
+    usecase createClient
+    usecase updateClient
+    usecase deleteClient
+    usecase listClients
+    usecase showClient
+}
+
+employee --> createClient
+employee --> updateClient
+employee --> deleteClient
+employee --> listClients
+employee --> showClient
+/' reviewer --> listClient
+reviewer --> showClient '/
+
+
+
+package ProjectUseCases {
+    usecase createProject
+    usecase updateProject
+    usecase deleteProject
+    usecase listProjects
+    usecase showProject
+}
+
+employee --> createProject
+employee --> updateProject
+employee --> deleteProject
+employee --> listProjects
+employee --> showProject
+client --> listProjects
+client --> showProject
+/' reviewer --> listProject
+reviewer --> showProject '/
+
+@enduml

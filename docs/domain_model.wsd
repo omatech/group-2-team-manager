@@ -1,11 +1,15 @@
 @startuml
   class Holding
-  class Worker
+  class Employee
   class Reviewer
   class Client
   class Company
   class Notification
+  class DaysOff
   class Project {
+    + id
+    + parentId
+    + name
     + hourPrice
     + deadLine
     + paymentDeadLine
@@ -23,11 +27,19 @@
     + concept
     + timestamp
   }
-  class WorkerEntry implements Entry
-  class BagEntry implements Entry
+  class EmployeeEntry implements Entry
+  class BagEntry implements Entry {
+    + id
+    + startDate
+    + totalHours
+    + remainingHours()
+  }
   class AssumedEntry implements Entry
   class HostingEntry implements Entry
   class Invoice {
+    + date
+    + base
+    + tax
     + isDeclared
     + status: InvoiceStatus
   }
@@ -39,19 +51,20 @@
     pending
   }
   class CorrectiveInvoice
-  class SubProject
   
   Holding *-- Company
   Company *-- Project
   Company ..> Client
   Company ..> Reviewer
   Project ..> Department
-  Project ..> Worker
+  Project ..> Employee
   Project *-- Entry
-  Entry *-- Worker
-  Entry *-- Department
   Project *-- Invoice
-  Worker --> Notification
+  Project -- Project
+  Entry *-- Employee
+  Entry *-- Department
+  Employee --> Notification
+  Employee --> DaysOff
   Invoice ..> CorrectiveInvoice
   Invoice +-- InvoiceStatus
   Department +-- DepartmentType
