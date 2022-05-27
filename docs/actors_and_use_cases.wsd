@@ -13,108 +13,165 @@ actor User
 
 User <|--- Employee #green;text:green : extends 
 User <|--- ExternalReviewer #green;text:green : extends 
-EmployeeAdmin ---|> Employee  #green;text:green : extends 
-ProjectManager ---|> Employee  #green;text:green : extends 
+EmployeeAdmin ----|> Employee  #green;text:green : extends 
+ProjectManager ----|> Employee  #green;text:green : extends 
 ExternalReviewer <|--- Company  #green;text:green : extends 
 EmployeeAdmin ---|> FinancialManager #green;text:green : extends 
 FinancialManager ---|> Company #green;text:green : extends 
 
 /' Employee use cases'/
-usecase syncEmployee
-usecase listEmployees
-usecase showEmployee
-usecase sendNotificationToEmployee
+together {
+    usecase syncEmployee
+    usecase sendNotificationToEmployee
+}
 
-usecase createCompany
-usecase listCompanies
-usecase showCompany
-usecase updateCompany
-usecase deleteCompany
+together {
+    usecase listEmployees
+    usecase showEmployee
+}
 
-usecase createProject
-usecase updateProject
-usecase deleteProject
-usecase listProjects
-usecase showProject
+together {
+    usecase createCompany
+    usecase listCompanies
+    usecase showCompany
+    usecase updateCompany
+    usecase deleteCompany
+    usecase attachClientToCompany
+    usecase detachClientOfCompany
+}
 
-usecase listPurchases
-usecase showPurchase
+together {
+    usecase createHolding
+    usecase listHoldings
+    usecase showHolding
+    usecase updateHolding
+    usecase deleteHolding
+}
 
-usecase listInvoices
-usecase showInvoice
-usecase exportInvoice
-usecase exportInvoices
-usecase createInvoice
-usecase recalculateInvoice
-usecase declareToTaxAuthorities
-usecase changeStatusOfInvoice
-usecase deleteInvoice
+together {
+    usecase createProject
+    usecase updateProject
+    usecase deleteProject
+    usecase listProjects
+    usecase showProject
+    usecase attachEmployeeToProject
+    usecase detachEmployeeOfProject
+}
 
-usecase login
-usecase logout
-usecase updatePassword
-usecase resetPassword
+together {
+    usecase listPurchases
+    usecase showPurchase
+}
 
-usecase createEntry
-usecase updateEntry
-usecase deleteEntry
+together {
+    usecase listInvoices
+    usecase showInvoice
+    usecase exportInvoice
+    usecase exportInvoices
+    usecase createInvoice
+    usecase recalculateInvoice
+    usecase declareToTaxAuthorities
+    usecase changeStatusOfInvoice
+    usecase deleteInvoice
+}
 
-usecase createDepartment
-usecase listDepartments
-usecase showDepartment
-usecase updateDepartment
-usecase deleteDepartment
+together {
+    usecase login
+    usecase logout
+    usecase updatePassword
+    usecase resetPassword
+}
 
-Time ---> syncEmployee 
-Time ---> sendNotificationToEmployee
+together {
+    usecase createEntry
+    usecase updateEntry
+    usecase deleteEntry
+}
 
-Employee ---> createEntry
-Employee ---> updateEntry
-Employee ---> deleteEntry
+together {
+    usecase createDepartment
+    usecase listDepartments
+    usecase showDepartment
+    usecase updateDepartment
+    usecase deleteDepartment
+}
 
-Employee ---> listEmployees
-Employee ---> showEmployee
+together {
+    usecase createUser
+    usecase listUsers
+    usecase showUser
+    usecase updateUser
+    usecase deleteUser
+}
 
-Employee ---> listProjects
-Employee ---> showProject
+Time --> syncEmployee 
+Time --> sendNotificationToEmployee
 
-EmployeeAdmin ---> createCompany
-EmployeeAdmin ---> listCompanies
-EmployeeAdmin ---> showCompany
-EmployeeAdmin ---> updateCompany
-EmployeeAdmin ---> deleteCompany
+Employee --> createEntry
+Employee --> updateEntry
+Employee --> deleteEntry
 
-EmployeeAdmin ---> createProject
-EmployeeAdmin ---> updateProject
-EmployeeAdmin ---> deleteProject
+Employee --> listProjects
+Employee --> showProject
 
-EmployeeAdmin ---> createDepartment
-EmployeeAdmin ---> listDepartments
-EmployeeAdmin ---> showDepartment
-EmployeeAdmin ---> updateDepartment
-EmployeeAdmin ---> deleteDepartment
+ProjectManager ---> attachEmployeeToProject
+ProjectManager ---> detachEmployeeOfProject
 
+EmployeeAdmin --> listEmployees
+EmployeeAdmin --> showEmployee
 
-ExternalReviewer ---> listProjects
-ExternalReviewer ---> showProject
+EmployeeAdmin --> createCompany
+EmployeeAdmin --> listCompanies
+EmployeeAdmin --> showCompany
+EmployeeAdmin --> updateCompany
+EmployeeAdmin --> deleteCompany
+EmployeeAdmin --> attachClientToCompany
+EmployeeAdmin --> detachClientOfCompany
 
-Company ---> listPurchases
-Company ---> showPurchase
+EmployeeAdmin --> createHolding
+EmployeeAdmin --> listHoldings
+EmployeeAdmin --> showHolding
+EmployeeAdmin --> updateHolding
+EmployeeAdmin --> deleteHolding
 
-Company ---> listInvoices
-Company ---> showInvoice
-Company ---> exportInvoice
-Company ---> exportInvoices
+EmployeeAdmin --> createProject
+EmployeeAdmin --> updateProject
+EmployeeAdmin --> deleteProject
+EmployeeAdmin --> attachEmployeeToProject
+EmployeeAdmin --> detachEmployeeOfProject
 
-FinancialManager ---> createInvoice
-FinancialManager ---> recalculateInvoice
-FinancialManager ---> changeStatusOfInvoice
-FinancialManager ---> declareToTaxAuthorities
-FinancialManager ---> deleteInvoice
+EmployeeAdmin --> createDepartment
+EmployeeAdmin --> listDepartments
+EmployeeAdmin --> showDepartment
+EmployeeAdmin --> updateDepartment
+EmployeeAdmin --> deleteDepartment
 
-User ---> login
-User ---> logout
-User ---> updatePassword
-User ---> resetPassword
+EmployeeAdmin --> createUser
+EmployeeAdmin --> listUsers
+EmployeeAdmin --> showUser
+EmployeeAdmin --> updateUser
+EmployeeAdmin --> deleteUser
+
+ExternalReviewer --> listProjects
+ExternalReviewer --> showProject
+
+Company --> listPurchases
+Company --> showPurchase
+
+Company --> listInvoices
+Company --> showInvoice
+Company --> exportInvoice
+Company --> exportInvoices
+
+FinancialManager --> createInvoice
+FinancialManager --> recalculateInvoice
+FinancialManager --> changeStatusOfInvoice
+FinancialManager --> declareToTaxAuthorities
+FinancialManager --> deleteInvoice
+
+User --> login
+User --> logout
+User --> updatePassword
+User --> resetPassword
 
 @enduml
